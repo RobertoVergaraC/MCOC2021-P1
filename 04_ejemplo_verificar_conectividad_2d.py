@@ -73,7 +73,7 @@ ver_reticulado_2d(ret,
 	opciones_nodos=opciones_nodos, 
 	opciones_barras=opciones_barras)
 
-Kff = ret.Kff
+Kff = ret.kff
 
 from scipy.linalg import eigh
 

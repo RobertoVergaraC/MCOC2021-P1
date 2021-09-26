@@ -80,16 +80,8 @@ class Barra(object):
         return se
 
 
-    def chequear_diseño(self, Fu, ret, ϕ=0.9):
-<<<<<<< HEAD
-        """Implementar"""	
-        
-        return 0
-
     def obtener_factor_utilizacion(self, Fu, ϕ=0.9):
-        """Implementar"""	
-=======
-        
+        """Implementar"""	       
         area = self.seccion.area()
         peso = self.seccion.peso()
         inercia_xx = self.seccion.inercia_xx()
@@ -124,23 +116,14 @@ class Barra(object):
         
         #Si pasa todas las pruebas, estamos bien
         return True
->>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         
 
 
-<<<<<<< HEAD
     def rediseñar(self, Fu, ret, ϕ=0.9):
         """Implementar"""	
         
 
 
-
-
-    def obtener_factor_utilizacion(self, Fu, ϕ=0.9):
-        A = self.seccion.area()
-        Fn = A * σy_acero
-
-=======
     def chequear_diseño(self, Fu, ret, ϕ=0.9):
         
         area = self.seccion.area()
@@ -185,14 +168,8 @@ class Barra(object):
         """Implementar"""	
         
 
-
-
-
     def obtener_factor_utilizacion(self, Fu, ϕ=0.9):
         A = self.seccion.area()
         Fn = A * σy_acero
 
->>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         return abs(Fu) / (ϕ*Fn)
-
-

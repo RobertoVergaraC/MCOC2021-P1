@@ -85,7 +85,7 @@ class Reticulado(object):
 
 
 
-    def ensamblar_sistema(self, factor_peso_propio):
+    def ensamblar_sistema(self, factor_peso_propio=[0.,0.,0.]):
         #Ensambar riguidez y vector de cargas
         n=self.Nnodos*3
         self.k= np.zeros((n,n))
@@ -145,8 +145,8 @@ class Reticulado(object):
                 self.u[gdl_global] += valor
                 gdl_fijos.append(gdl_global)
 
-        gdl_fijos = np.array(gdl_fijos)
-        gdl_libres = np.setdiff1d(gdl_libres, gdl_fijos)
+        self.gdl_fijos = np.array(gdl_fijos)
+        self.gdl_libres = np.setdiff1d(gdl_libres, gdl_fijos)
 
         #Ahora con las cargas aplicadas al sistema (al igual como lo hicimos con ensamblar sistema)
         for n in self.cargas:
@@ -156,20 +156,20 @@ class Reticulado(object):
                 gdl_global = gdl + n*3
                 self.f[gdl_global] += valor
 
-        kff= self.k[np.ix_(gdl_libres, gdl_libres)]
-        kcc= self.k[np.ix_(gdl_fijos, gdl_fijos)]
-        kcf= self.k[np.ix_(gdl_fijos, gdl_libres)]
-        kfc= self.k[np.ix_(gdl_libres, gdl_fijos)]
+        self.kff= self.k[np.ix_(self.gdl_libres, self.gdl_libres)]
+        self.kcc= self.k[np.ix_(self.gdl_fijos, self.gdl_fijos)]
+        self.kcf= self.k[np.ix_(self.gdl_fijos, self.gdl_libres)]
+        self.kfc= self.k[np.ix_(self.gdl_libres, self.gdl_fijos)]
 
-        uf = self.u[gdl_libres]
-        uc = self.u[gdl_fijos]
+        uf = self.u[self.gdl_libres]
+        uc = self.u[self.gdl_fijos]
 
-        ff = self.f[gdl_libres]
-        fc = self.f[gdl_fijos]
+        ff = self.f[self.gdl_libres]
+        fc = self.f[self.gdl_fijos]
 
-        r = solve(kff, ff-kfc@uc)
+        r = solve(self.kff, ff-self.kfc@uc)
         
-        self.u[gdl_libres] = r
+        self.u[self.gdl_libres] = r
 
         return 0
 
@@ -186,11 +186,11 @@ class Reticulado(object):
 
     def obtener_fuerzas(self):
         
-        fuerzas = np.zeros((len(self.barras)), dtype=np.double)
+        self.fuerzas = np.zeros((len(self.barras)), dtype=np.double)
         for i,b in enumerate(self.barras):
-            fuerzas[i] = b.obtener_fuerza(self)
+            self.fuerzas[i] = b.obtener_fuerza(self)
 
-        return fuerzas
+        return self.fuerzas
 
 
     def obtener_factores_de_utilizacion(self, f, ϕ=0.9):      
