@@ -178,6 +178,7 @@ class Reticulado(object):
         return self.u[gdl]	
 
     def obtener_fuerzas(self):
+<<<<<<< HEAD
         contador = 0
         fz = np.zeros((len(self.barras)))
         for i in self.barras:
@@ -185,12 +186,29 @@ class Reticulado(object):
             self.fuerzas.append(fz[contador])
             contador +=1
         return fz
+=======
+        
+        fuerzas = np.zeros((len(self.barras)), dtype=np.double)
+        for i,b in enumerate(self.barras):
+            fuerzas[i] = b.obtener_fuerza(self)
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
 
+        return fuerzas
 
+<<<<<<< HEAD
     def obtener_factores_de_utilizacion(self, f):
         """Implementar"""	
+=======
+
+    def obtener_factores_de_utilizacion(self, f, ϕ=0.9):
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         
-        return 0
+        FU = np.zeros((len(self.barras)), dtype=np.double)
+        for i,b in enumerate(self.barras):
+            FU[i] = b.obtener_factor_utilizacion(f[i], ϕ)
+
+        return FU
+
 
     def rediseñar(self, Fu, ϕ=0.9):
         """Implementar"""	
@@ -200,10 +218,19 @@ class Reticulado(object):
 
 
     def chequear_diseño(self, Fu, ϕ=0.9):
+<<<<<<< HEAD
         """Implementar"""	
         
         return 0
 
+=======
+        cumple = True
+        for i,b in enumerate(self.barras):
+            if not b.chequear_diseño(Fu[i], self, ϕ):
+                print(f"----> Barra {i} no cumple algun criterio. ")
+                cumple = False
+        return cumple
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
 
     def __str__(self):
 
