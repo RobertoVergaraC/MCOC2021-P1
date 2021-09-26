@@ -129,6 +129,9 @@ class SeccionICHA(object):
         return den
 
 
+    def nombre(self):
+        return self.denominacion
+
     def __str__(self):
 
         value = True
