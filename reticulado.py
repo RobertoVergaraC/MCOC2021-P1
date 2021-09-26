@@ -322,15 +322,15 @@ class Reticulado(object):
             gdl = []
             res = []
 
-            print(self.restricciones[nodo])
-            for i in self.restricciones[nodo]:
-
-                print(i)
-                
+            print(nodo)
+            print(type(nodo))
+            #print(self.restricciones[str(nodo)])
+            for i in nodo[1]:            
                 gdl.append(int(i[0]))
                 res.append(int(i[1]))
 
-            restricciones[i, 0] = nodo
+            print(nodo[0])
+            restricciones[i, 0] = int(nodo[0])
             restricciones[i, 1] = gdl[-1]   #PREGUNTAR  
 
 
