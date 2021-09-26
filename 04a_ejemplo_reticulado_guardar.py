@@ -73,5 +73,8 @@ opciones_barras = {
 }
 ver_reticulado_3d(ret,opciones_barras=opciones_barras)
 
+for nodo in ret.restricciones:
+
+	print(f" nodo {nodo} = {ret.restricciones[nodo]}")
 
 ret.guardar("04a_ejemplo_reticulado_guardar.h5")

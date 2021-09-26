@@ -287,9 +287,6 @@ class Reticulado(object):
     def guardar(self, nombre):
         import h5py
 
-        print(f"Gaurdando en {nombre}")
-
-
         #Guarda nodos xyz
 
         dataset = h5py.File(nombre, "w")
@@ -300,18 +297,49 @@ class Reticulado(object):
         
         barras = np.zeros((len(self.barras),2), dtype = np.int32)
 
-        secciones= dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype= h5py.string_dtype())
+        secciones = dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype= h5py.string_dtype())
 
-    
         for i,b in enumerate(self.barras):
 
-            print(f"barra = {i } ni = {b.ni} nj = {b.nj} sec= {b.seccion.nombre()}")
+
             barras[i, 0] = b.ni
             barras[i, 1] = b.nj
 
             secciones[i,0] = b.seccion.nombre()
 
-
         dataset["barras"] = barras
+
+
+        restricciones = dataset.create_dataset("restricciones", shape=((len(self.barras)),2), dtype= np.int32)
+
+        restricciones_val = dataset.create_dataset("restricciones_val", shape=((len(self.barras)),1), dtype= np.int32)
+
+
+        self.restricciones = sorted(self.restricciones.items())
+
+        print(self.restricciones)
+        for nodo in self.restricciones:
+            gdl = []
+            res = []
+
+            print(self.restricciones[nodo])
+            for i in self.restricciones[nodo]:
+
+                print(i)
+                
+                gdl.append(int(i[0]))
+                res.append(int(i[1]))
+
+            restricciones[i, 0] = nodo
+            restricciones[i, 1] = gdl[-1]   #PREGUNTAR  
+
+
+            restricciones_val[i, 0] =  res[-1]           
+
+        # cargas = dataset.create_dataset("secciones", shape=((len(self.barras)),2), dtype= int32)
+
+        # cargass_val = dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype = double)
+
+
 
 
