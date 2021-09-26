@@ -283,3 +283,35 @@ class Reticulado(object):
             s += "\n"
 
         return s
+
+    def guardar(self, nombre):
+        import h5py
+
+        print(f"Gaurdando en {nombre}")
+
+
+        #Guarda nodos xyz
+
+        dataset = h5py.File(nombre, "w")
+        dataset["xyz"] = self.xyz            
+
+
+        #Guarda barras y sus secciones
+        
+        barras = np.zeros((len(self.barras),2), dtype = np.int32)
+
+        secciones= dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype= h5py.string_dtype())
+
+    
+        for i,b in enumerate(self.barras):
+
+            print(f"barra = {i } ni = {b.ni} nj = {b.nj} sec= {b.seccion.nombre()}")
+            barras[i, 0] = b.ni
+            barras[i, 1] = b.nj
+
+            secciones[i,0] = b.seccion.nombre()
+
+
+        dataset["barras"] = barras
+
+

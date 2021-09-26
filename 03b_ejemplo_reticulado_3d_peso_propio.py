@@ -99,3 +99,5 @@ opciones_barras = {
 ver_reticulado_3d(ret, 
 	opciones_nodos=opciones_nodos, 
 	opciones_barras=opciones_barras)
+
+
