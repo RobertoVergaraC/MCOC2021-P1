@@ -145,6 +145,7 @@ class Reticulado(object):
                 self.u[gdl_global] += valor
                 gdl_fijos.append(gdl_global)
 
+<<<<<<< HEAD
         gdl_fijos = np.array(gdl_fijos)
         gdl_libres = np.setdiff1d(gdl_libres, gdl_fijos)
 
@@ -202,6 +203,18 @@ class Reticulado(object):
 
     def obtener_factores_de_utilizacion(self, f, ϕ=0.9):
 >>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
+=======
+    def obtener_fuerzas(self):
+        
+        fuerzas = np.zeros((len(self.barras)), dtype=np.double)
+        for i,b in enumerate(self.barras):
+            fuerzas[i] = b.obtener_fuerza(self)
+
+        return fuerzas
+
+
+    def obtener_factores_de_utilizacion(self, f, ϕ=0.9):
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         
         FU = np.zeros((len(self.barras)), dtype=np.double)
         for i,b in enumerate(self.barras):
@@ -219,17 +232,23 @@ class Reticulado(object):
 
     def chequear_diseño(self, Fu, ϕ=0.9):
 <<<<<<< HEAD
+<<<<<<< HEAD
         """Implementar"""	
         
         return 0
 
 =======
+=======
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         cumple = True
         for i,b in enumerate(self.barras):
             if not b.chequear_diseño(Fu[i], self, ϕ):
                 print(f"----> Barra {i} no cumple algun criterio. ")
                 cumple = False
         return cumple
+<<<<<<< HEAD
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
+=======
 >>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
 
     def __str__(self):

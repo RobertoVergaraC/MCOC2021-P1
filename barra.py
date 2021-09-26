@@ -128,6 +128,7 @@ class Barra(object):
         
 
 
+<<<<<<< HEAD
     def rediseñar(self, Fu, ret, ϕ=0.9):
         """Implementar"""	
         
@@ -139,6 +140,59 @@ class Barra(object):
         A = self.seccion.area()
         Fn = A * σy_acero
 
+=======
+    def chequear_diseño(self, Fu, ret, ϕ=0.9):
+        
+        area = self.seccion.area()
+        peso = self.seccion.peso()
+        inercia_xx = self.seccion.inercia_xx()
+        inercia_yy = self.seccion.inercia_yy()
+        nombre = self.seccion.nombre()
+        
+        #Resistencia nominal
+        Fn = area * σy_acero
+
+        #Revisar resistencia nominal
+        if abs(Fu) > ϕ*Fn:
+            print(f"Resistencia nominal Fu = {Fu} ϕ*Fn = {ϕ*Fn}")
+            return False
+
+        L = self.calcular_largo(ret)
+
+        #Inercia es la minima
+        I = min(inercia_xx, inercia_yy)
+        i = np.sqrt(I/area)
+
+        #Revisar radio de giro
+        if Fu >= 0 and L/i > 300:
+            print(f"Esbeltez Fu = {Fu} L/i = {L/i}")
+            return False
+
+        #Revisar carga critica de pandeo
+        if Fu < 0:  #solo en traccion
+            Pcr = np.pi**2*E_acero*I / L**2
+            if abs(Fu) > Pcr:
+                print(f"Pandeo Fu = {Fu} Pcr = {Pcr}")
+                return False
+        
+        #Si pasa todas las pruebas, estamos bien
+        return True
+        
+
+
+    def rediseñar(self, Fu, ret, ϕ=0.9):
+        
+        """Implementar"""	
+        
+
+
+
+
+    def obtener_factor_utilizacion(self, Fu, ϕ=0.9):
+        A = self.seccion.area()
+        Fn = A * σy_acero
+
+>>>>>>> cd8f38c631faf147be0d7e80fcbfed097661e03f
         return abs(Fu) / (ϕ*Fn)
 
 
