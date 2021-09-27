@@ -177,12 +177,6 @@ class Reticulado(object):
         gdl = [3*n, 3*n+1, 3*n+2]
         return self.u[gdl]	
 
-    def obtener_fuerzas(self):      
-        fuerzas = np.zeros((len(self.barras)), dtype=np.double)
-        for i,b in enumerate(self.barras):
-            fuerzas[i] = b.obtener_fuerza(self)
-
-        return fuerzas
 
     def obtener_fuerzas(self):
         
@@ -310,36 +304,52 @@ class Reticulado(object):
         dataset["barras"] = barras
 
 
-        restricciones = dataset.create_dataset("restricciones", shape=((len(self.barras)),2), dtype= np.int32)
-
-        restricciones_val = dataset.create_dataset("restricciones_val", shape=((len(self.barras)),1), dtype= np.int32)
-
-
-        self.restricciones = sorted(self.restricciones.items())
-
-        print(self.restricciones)
+        cont = 0
         for nodo in self.restricciones:
-            gdl = []
-            res = []
+            
 
-            print(nodo)
-            print(type(nodo))
-            #print(self.restricciones[str(nodo)])
-            for i in nodo[1]:            
-                gdl.append(int(i[0]))
-                res.append(int(i[1]))
+            for i in self.restricciones[nodo]:
+                
+                cont += 1
 
-            print(nodo[0])
-            restricciones[i, 0] = int(nodo[0])
-            restricciones[i, 1] = gdl[-1]   #PREGUNTAR  
+                
+
+        restricciones1 = dataset.create_dataset("restricciones", shape=(cont,2), dtype= np.int32)
+
+        restricciones_val = dataset.create_dataset("restricciones_val", shape=(cont,1), dtype= np.double)
+        
+
+        cont = 0
+        for nodo in self.restricciones:
+
+            for i in self.restricciones[nodo]:
+                
+
+                restricciones1[cont, 0] = nodo
+                restricciones1[cont, 1] = i[0]
+                
+                restricciones_val[cont, 0] = i[1]
+                cont += 1
 
 
-            restricciones_val[i, 0] =  res[-1]           
-
-        # cargas = dataset.create_dataset("secciones", shape=((len(self.barras)),2), dtype= int32)
-
-        # cargass_val = dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype = double)
+                      
+        
+            
 
 
+        cargas1 = dataset.create_dataset("cargas", shape=(cont,2), dtype= np.int32)
 
+        cargass_val = dataset.create_dataset("cargas_val", shape=(cont,1), dtype = np.double)
+
+
+
+        cont = 0
+        for nodo in self.fuerzas:
+
+
+            restricciones1[cont, 0] = nodo
+            restricciones1[cont, 1] = i[0]
+            
+            restricciones_val[cont, 0] = i[1]
+            cont += 1
 
