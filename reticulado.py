@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.linalg import solve, inv
 import scipy.linalg as lin
+from matplotlib.pylab import *
+import h5py
 
 class Reticulado(object):
     """Define un reticulado"""
@@ -279,7 +281,6 @@ class Reticulado(object):
         return s
 
     def guardar(self, nombre):
-        import h5py
 
         #Guarda nodos xyz
 
@@ -330,26 +331,30 @@ class Reticulado(object):
                 
                 restricciones_val[cont, 0] = i[1]
                 cont += 1
-
-
-                      
         
-            
+        cont = 0
+        print(f"cargas={self.cargas}")
+        
 
+        for nodo in self.cargas:
+             for i in self.cargas[nodo]:
+                cont += 1
 
+        
         cargas1 = dataset.create_dataset("cargas", shape=(cont,2), dtype= np.int32)
 
-        cargass_val = dataset.create_dataset("cargas_val", shape=(cont,1), dtype = np.double)
-
-
+        cargas_val = dataset.create_dataset("cargas_val", shape=(cont,1), dtype = np.double)
 
         cont = 0
-        for nodo in self.fuerzas:
-
-
-            restricciones1[cont, 0] = nodo
-            restricciones1[cont, 1] = i[0]
-            
-            restricciones_val[cont, 0] = i[1]
+        for nodo in self.cargas:
+            for i in self.cargas[nodo]:
+                cargas1[cont, 0] = nodo
+                cargas1[cont, 1] = i[0]
+                cargas_val[cont, 0] = i[1]
             cont += 1
+
+    def abrir(self, nombre):
+        self.fid =h5py.File(nombre,"r")
+
+
 
