@@ -215,7 +215,6 @@ class Reticulado(object):
         return cumple
 
     def __str__(self):
-
         #Nodos
         s = "nodos: \n"
 
