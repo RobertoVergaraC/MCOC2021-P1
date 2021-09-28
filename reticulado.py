@@ -406,11 +406,11 @@ class Reticulado(object):
         cont3=0
         for i in cargas:
             nodo=i[0]
-            gdl=[1]
-            valor= cargas_val[cont3]
+            gdl= i[1]
+            valor= cargas_val[cont3][0]
             cont3+=1
-
-        #self.agregar_nodo()
+            #print(f"nodo, gdl, valor = {nodo}, {gdl}, {valor}")
+            self.agregar_fuerza(nodo, gdl, valor)
 
 
 
