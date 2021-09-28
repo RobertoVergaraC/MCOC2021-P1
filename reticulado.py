@@ -3,6 +3,8 @@ from scipy.linalg import solve, inv
 import scipy.linalg as lin
 from matplotlib.pylab import *
 import h5py
+from secciones import SeccionICHA
+from barra import Barra
 
 class Reticulado(object):
     """Define un reticulado"""
@@ -355,6 +357,60 @@ class Reticulado(object):
 
     def abrir(self, nombre):
         self.fid =h5py.File(nombre,"r")
+        coordenadas_nodos=self.fid["xyz"]
+        secciones=self.fid["secciones"]
+        barras=self.fid["barras"]
+        restricciones=self.fid["restricciones"]
+        restricciones_val=self.fid["restricciones_val"]
+        cargas=self.fid["cargas"]
+        cargas_val=self.fid["cargas_val"]
+        c1="#3A8431"
+        c2="#A3500B"
+
+        #Nodos
+        #print(coordenadas_nodos[:,:])
+        for i in coordenadas_nodos:
+            x=i[0]
+            #print(x)
+            y=i[1]
+            #print(y)
+            z=i[2]
+            #print(z)
+            self.agregar_nodo(x=x,y=y,z=z)
+
+        #Crear y agregar las barras
+        cont1=0
+        lista = []
+        for seccion in secciones:
+            seccion = str(seccion[0])
+            seccion = seccion[2:-1]
+            a = SeccionICHA(seccion, color=c2)
+            if len(lista) != 0:
+                if lista[0].denominacion != seccion:
+                    a.color = c1
+            lista.append(a)
+            self.agregar_barra(Barra(barras[cont1][0], barras[cont1][1], a))
+            cont1+=1
+
+        #Crear restricciones
+        cont2=0
+        for i in restricciones:
+            #print(f"restricciones={i}")
+            nodo=i[0]
+            gdl=i[1]
+            valor=restricciones_val[cont2]
+            self.agregar_restriccion(nodo, gdl, valor)
+            cont2+=1
+
+        #Agregar carga puntual
+        cont3=0
+        for i in cargas:
+            nodo=i[0]
+            gdl=[1]
+            valor= cargas_val[cont3]
+            cont3+=1
+
+        #self.agregar_nodo()
 
 
 
