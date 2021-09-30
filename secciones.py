@@ -1,7 +1,6 @@
 from numpy import pi, sqrt, nan
 from numpy.random import rand
 from constantes import g_, ρ_acero, mm_
-import pandas as pd
  
 class Circular(object):
     """define una seccion Circular"""
@@ -34,6 +33,8 @@ class Circular(object):
         
 #Mas adelante, no es para P1E1
 
+from pandas import read_excel
+
 class SeccionICHA(object):
     """Lee la tabla ICHA y genera una seccion apropiada"""
 
@@ -42,119 +43,127 @@ class SeccionICHA(object):
         self.denominacion = denominacion
         self.color = color  #color para la seccion
 
-        busc = self.buscador()
+        if denominacion[0:2] == "HR" or denominacion[0] == "W":
+            tab = "HR"
+            tipo = "HR"
+        elif denominacion[0] == "H":
+            tab = "H"
+            tipo = "H"
+        elif denominacion[0:2] == "[]":
+            tab = "Cajon"
+            tipo = "[]"
+        elif denominacion[0] == "o":
+            tab = "Circulares Menores"
+            tipo = "o"
+        elif denominacion[0] == "O":
+            tab = "Circulares Mayores"
+            tipo = "O"
+        else:
+            print(f"Tipo de seccion {denominacion} no soportada. Intentar H, HR, [], o u O")
+            self.invalid_section()
 
-        dfs = pd.read_excel(base_datos, sheet_name = busc[0])
+        found = False
 
-        v = 0
-        for i in dfs.index:
-            if str(dfs.iloc[i,0]) != 'nan':
-                v = i
-                break
+        xls = read_excel(base_datos,
+        engine="openpyxl",
+        sheet_name=tab,
+        header=3)
 
-        pos_titulo_1 = v
-        pos_titulo_2 = pos_titulo_1 + 2
-        pos_titulo_3 = pos_titulo_2 + 4
+        if debug:
+            print("======xls=======")
+            print(xls)
+            print("======xls=======")
 
-        if busc[0] == "H" or busc[0] == "PH" or busc[0] == "HR":
-            if busc[0] == "HR":
-                dfs.iloc[pos_titulo_2, 3] = "peso (lbf/pie)"
-            dfs.columns = [dfs.loc[pos_titulo_2]]
-        
-            self.row_fin = dfs.iloc[0,:]
-            for index, row in dfs.iterrows():
-                if (row['d'] == busc[1]) and (row['bf'] == busc[2]) and (row['peso'] == busc[3]):
-                    self.row_fin = dfs.loc[index,:]
-            #print(self.row_fin)
 
-        elif busc[0] == "Cajon":
-            dfs.columns = [dfs.loc[pos_titulo_2]]
-        
-            self.row_fin = dfs.iloc[1,:]
-            for index, row in dfs.iterrows():
-                if (row['D'] == busc[1]) and (row['B'] == busc[2]) and (row['peso'] == busc[3]):
-                    self.row_fin = dfs.loc[index,:]
-            #print(self.row_fin)
+        if tipo == "H" or tipo == "HR":
+            Nregistros = len(xls["A"])-2
+            for i_fila in range(Nregistros):
+                
+                df = xls.loc[i_fila+2,["d","bf","peso","A","Ix/10⁶","Iy/10⁶",]]
+                if debug:
+                    print("======df=======")
+                    print(df)
+                    print("======df=======")
 
-        elif busc[0] == "Circulares Mayores" or busc[0] == "Circulares Menores":
-            pos_titulo_2 -= 1
-            dfs.columns = [dfs.loc[pos_titulo_2]]
+                if df.isnull().values.any():
+                    #Saltarse valores inexistentes
+                    continue
 
-            self.row_fin = dfs.iloc[1,:]
-            for index, row in dfs.iterrows():
-                if (row['D'] == busc[1]) and (row['Dint'] == busc[2]):
-                    self.row_fin = dfs.loc[index,:]
-            #print(self.row_fin)
+                d = df["d"]
+                bf = df["bf"]
+                w = df["peso"]
+                den = f'{tipo}{d}x{bf}x{w}'
 
+                if den == self.denominacion:
+                    found = True
+                    self.d = df["d"]
+                    self.bf = df["bf"]
+                    self.w = df["peso"]
+                    self.A = df["A"]*mm_**2
+                    self.Ixx = df["Ix/10⁶"]*1e6**mm_**4
+                    self.Iyy = df["Iy/10⁶"]*1e6**mm_**4
+                    # self.denominacion = denominacion
+                    print(f"{den} encontrada. A={self.A} Ix={self.Ixx} Iy={self.Iyy} ")
+
+        if tipo == "[]":
+            Nregistros = len(xls["A"])-2
+            for i_fila in range(Nregistros):
+                
+                df = xls.loc[i_fila+2,["D","B","peso","A","Ix/10⁶","Iy/10⁶",]]
+                if debug:
+                    print("======df=======")
+                    print(df)
+                    print("======df=======")
+
+                if df.isnull().values.any():
+                    #Saltarse valores inexistentes
+                    continue
+
+                D = df["D"]
+                B = df["B"]
+                W = df["peso"]
+                den = f'{tipo}{D}x{B}x{W}'
+
+                if den == self.denominacion:
+                    found = True
+                    self.D = df["D"]
+                    self.B = df["B"]
+                    self.w = df["peso"]
+                    self.A = df["A"]*mm_**2
+                    self.Ixx = df["Ix/10⁶"]*1e6**mm_**4
+                    self.Iyy = df["Iy/10⁶"]*1e6**mm_**4
+                    # self.denominacion = denominacion
+                    print(f"{den} encontrada. A={self.A} Ix={self.Ixx} Iy={self.Iyy} ")
+
+        if not found:
+            print(f"Tipo de seccion {denominacion} no encontrada en base de datos")
+            self.invalid_section()
         
     def area(self):
-        return self.row_fin['A']/(1e6)
+        return self.A
 
     def peso(self):
-        return self.row_fin['peso']
+        return self.w
 
     def inercia_xx(self):
-        if 'Ix/10⁶' in self.row_fin:
-            return self.row_fin['Ix/10⁶']
-        else:
-            return self.row_fin['I/10⁶']
+        return self.Ixx
 
     def inercia_yy(self):
-        if 'Iy/10⁶' in self.row_fin:
-            return self.row_fin['Iy/10⁶']
-        else:
-            return self.row_fin['I/10⁶']
+        return self.Iyy
 
-    def buscador(self):
-        #Lista del tipo [HR, 1118, 405, 517,7]
-        deno = self.denominacion
-        for index, letter in enumerate(deno, 0):
-            if letter.isdigit():
-                deno = [deno[:index],deno[index:]]
-                break
-
-        den = []
-        den.append(deno[0])
-        deno2 = deno[1].split('x')
-        for i in deno2:
-            den.append(float(i))
-
-        if den[0] == "[]":
-            den[0] = "Cajon"
-        if den[0] == "O":
-            den[0] = "Circulares Mayores"
-        if den[0] == "o":
-            den[0] = "Circulares Menores"
-
-        return den
-
-
-    def nombre(self):
-        return self.denominacion
+    def invalid_section(self):
+        self.A = nan
+        self.peso = nan
+        self.Ixx = nan
+        self.Iyy = nan
 
     def nombre(self):
         return self.denominacion
 
     def __str__(self):
-
-        value = True
-
-        for i in self.row_fin.values:
-            if str(i) != 'nan':
-                value = True
-                break
-            else:
-                value = False
-
-        if value:
-            s = f"{self.denominacion} encontrada. A={self.area()} Ix={self.inercia_xx()} Iy={self.inercia_yy()}\n"
-        else:
-            s = "Tipo de seccion " + self.denominacion + " no encontrada en base de datos\n"
-
-        s += f"Seccion ICHA {self.denominacion}\n"
-        s += f"  Area : {self.area()}\n"
-        s += f"  peso : {self.peso()}\n"
-        s += f"  Ixx  : {self.inercia_xx()}\n"
-        s += f"  Iyy  : {self.inercia_yy()}\n"
-
+        s = f"Seccion ICHA {self.denominacion}\n"
+        s += f"  Area : {self.A}\n"
+        s += f"  peso : {self.peso}\n"
+        s += f"  Ixx  : {self.Ixx}\n"
+        s += f"  Iyy  : {self.Iyy}\n"
         return s
