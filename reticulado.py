@@ -1,415 +1,354 @@
 import numpy as np
-from scipy.linalg import solve, inv
-import scipy.linalg as lin
-from matplotlib.pylab import *
-import h5py
-from secciones import SeccionICHA
-from barra import Barra
+from scipy.linalg import solve
 
 class Reticulado(object):
     """Define un reticulado"""
-    __NNodosInit__ = 100
+    __NNodosInit__ = 1
 
-    #constructor
-    def __init__(self): 
+    def __init__(self):
         super(Reticulado, self).__init__()
-        
-        #print("Constructor de Reticulado")
         
         self.xyz = np.zeros((Reticulado.__NNodosInit__,3), dtype=np.double)
         self.Nnodos = 0
         self.barras = []
         self.cargas = {}
         self.restricciones = {}
-        self.fuerzas = []
-        """Implementar"""
-        
+        self.Ndimensiones = 3
+        self.has_solution = False
 
     def agregar_nodo(self, x, y, z=0):
-        self.xyz.resize((self.Nnodos + 1, 3))
-        #print(f"Quiero agregar un nodo en ({x} {y} {z})")
-        numero_de_nodo_actual = self.Nnodos
-
-        self.xyz[numero_de_nodo_actual,:] = [x, y, z]
-
+        if self.Nnodos+1 > Reticulado.__NNodosInit__:
+            self.xyz.resize((self.Nnodos+1,3))
+        self.xyz[self.Nnodos,:] = [x, y, z]
         self.Nnodos += 1
-
-        return 0
+        if z != 0.:
+            self.Ndimensiones = 3
 
     def agregar_barra(self, barra):
-
-        self.barras.append(barra)	
-
-        return 0
+        self.barras.append(barra)
 
     def obtener_coordenada_nodal(self, n):
-
-        if n>= self.Nnodos:
-            return
+        if n >= self.Nnodos:
+            return 
         return self.xyz[n, :]
-    	
+
     def calcular_peso_total(self):
-        peso=0
+        peso = 0.
         for b in self.barras:
-            peso+=b.calcular_peso(self)	 
+            peso += b.calcular_peso(self)
         return peso
 
     def obtener_nodos(self):
-        
-        return self.xyz
+        return self.xyz[0:self.Nnodos,:].copy()
 
-      
-    def obtener_barras(self):	
-        
+    def obtener_barras(self):
         return self.barras
 
 
 
+
+
+
+
+
     def agregar_restriccion(self, nodo, gdl, valor=0.0):
-        #agrego restricción y consulto en el nodo
-        
-        if nodo in self.restricciones: 
-        
+
+        if nodo not in self.restricciones:
+            self.restricciones[nodo] = [[gdl, valor]]
+        else:
             self.restricciones[nodo].append([gdl, valor])
 
-        else:
-            self.restricciones[nodo]=[[gdl, valor]]
-        
-        return 0
 
     def agregar_fuerza(self, nodo, gdl, valor):
-        if nodo in self.cargas:
-
-            self.cargas[nodo].append([gdl, valor])
-        
+        """
+        Agrega una fuerza al sistema en el 'nodo', 
+        y 'gdl' especificados con el 'valor' dado. 
+        """
+        if nodo not in self.cargas:
+            self.cargas[nodo] = [[gdl, valor]]
         else:
-            self.cargas[nodo]=[[gdl, valor]]	
+            self.cargas[nodo].append([gdl, valor])
+
+
+    def ensamblar_sistema(self, factor_peso_propio=[0., 0., 0.], factor_cargas=0.):
         
-        return 0
+        Ngdl = self.Nnodos * self.Ndimensiones
+
+        self.K = np.zeros((Ngdl,Ngdl), dtype=np.double)
+        self.f = np.zeros((Ngdl), dtype=np.double)
+        self.u = np.zeros((Ngdl), dtype=np.double)
+
+        #Iterar sobre las barras:
+        for i,b in enumerate(self.barras):
+            ke = b.obtener_rigidez(self)
+            fe = b.obtener_vector_de_cargas(self,factor_peso_propio) 
+
+            # print(f"i = {i} fe = {fe}")
+
+            ni, nj = b.obtener_conectividad()
 
 
+            #MDR
+            if self.Ndimensiones == 2:
+                d = [2*ni, 2*ni+1 , 2*nj, 2*nj+1]
+            else:
+                d = [3*ni, 3*ni+1, 3*ni+2 , 3*nj, 3*nj+1, 3*nj+2]
 
-    def ensamblar_sistema(self, factor_peso_propio=[0.,0.,0.]):
-        #Ensambar riguidez y vector de cargas
-        n=self.Nnodos*3
-        self.k= np.zeros((n,n))
-        self.u=np.zeros(n)
-        self.f=np.zeros(n)
-        self.factor_modificado=[]
-        
-        for p in range(2):
-            for i in factor_peso_propio:
-                self.factor_modificado.append(i)
-
-        for e in self.barras: #aquí recorremos todas las barras
-        #ni, nj nodos i y j consultamos a las barras
-            ni= e.ni
-            nj= e.nj
-            ke=e.obtener_rigidez(self)
-
-            fe=e.obtener_vector_de_cargas(self)
-            d= [3*ni, 3*ni+1, 3*ni+2, 3*nj, 3*nj+1, 3*nj+2]
-
-            #Método de riguidez directa
-            for i in range(6):
+            for i in range(self.Ndimensiones*2):
                 p = d[i]
-                for j in range(6):
+                for j in range(self.Ndimensiones*2):
                     q = d[j]
-                    self.k[p,q]+=ke[i,j]
+                    self.K[p,q] += ke[i,j]
                 self.f[p] += fe[i]
 
-        #print(f"k = {self.k}")
-        #Agregamos cargas puntuales
-        #print(self.cargas)
 
-        #for node in self.cargas:
-            #print (self.cargas[node])
-            #Ncargas=len(self.cargas[node])
-            #print(Ncargas)
-            #for carga in self.cargas[node]:
-                #gdl=carga[0]
-                #f=carga[1]
-                #print(f"Agregando carga de {f} en GDL {gdl} ")
-                #gld_global=3*node+gdl
-                #print(f"f vale {f}")
-                #F[gld_global]+=f
-                #Vector de cargas externas??
-        return 0
+        for nodo in self.cargas:
+            for carga in self.cargas[nodo]:
+                gdl = carga[0]
+                valor = carga[1]
+
+                self.gdl_global = self.Ndimensiones*nodo + gdl
+                self.f[self.gdl_global] = factor_cargas*valor
+
+
 
     def resolver_sistema(self):
-        gdl_libres = np.arange(self.Nnodos*3)          #cant grados de libertad del sistema
-        gdl_fijos=[]
 
-        #Vemos las restricciones, gdl y valores
-        for i in self.restricciones:
-            for j in self.restricciones[i]:
-                gdl = j[0]
-                valor = j[1]
-                gdl_global = gdl + i*3
-                self.u[gdl_global] += valor
-                gdl_fijos.append(gdl_global)
+        # 0 : Aplicar restricciones
+        Ngdl = self.Nnodos * self.Ndimensiones
+        self.gdl_libres = np.arange(Ngdl)
+        self.gdl_restringidos = []
 
-        self.gdl_fijos = np.array(gdl_fijos)
-        self.gdl_libres = np.setdiff1d(gdl_libres, gdl_fijos)
+        #Pre-llenar el vector u
 
-        #Ahora con las cargas aplicadas al sistema (al igual como lo hicimos con ensamblar sistema)
-        for n in self.cargas:
-            for i in self.cargas[n]:
-                gdl = i[0]
-                valor = i[1]
-                gdl_global = gdl + n*3
-                self.f[gdl_global] += valor
+        for nodo in self.restricciones:
+            for restriccion in self.restricciones[nodo]:
+                gdl = restriccion[0]
+                valor = restriccion[1]
 
-        self.kff= self.k[np.ix_(self.gdl_libres, self.gdl_libres)]
-        self.kcc= self.k[np.ix_(self.gdl_fijos, self.gdl_fijos)]
-        self.kcf= self.k[np.ix_(self.gdl_fijos, self.gdl_libres)]
-        self.kfc= self.k[np.ix_(self.gdl_libres, self.gdl_fijos)]
+                self.gdl_global = self.Ndimensiones*nodo + gdl
+                self.u[self.gdl_global] = valor
 
+                self.gdl_restringidos.append(self.gdl_global)
+
+        # con self.gdl_restringidos encuentro  self.gdl_libres
+        self.gdl_restringidos = np.array(self.gdl_restringidos)
+        self.gdl_libres = np.setdiff1d(self.gdl_libres, self.gdl_restringidos)
+
+
+        #1 Particionar:
+
+
+        self.Kff = self.K[np.ix_(self.gdl_libres, self.gdl_libres)]
+        Kfc = self.K[np.ix_(self.gdl_libres, self.gdl_restringidos)]
+        Kcf = Kfc.T
+        Kcc = self.K[np.ix_(self.gdl_restringidos, self.gdl_restringidos)]
+ 
         uf = self.u[self.gdl_libres]
-        uc = self.u[self.gdl_fijos]
+        uc = self.u[self.gdl_restringidos]
 
         ff = self.f[self.gdl_libres]
-        fc = self.f[self.gdl_fijos]
+        fc = self.f[self.gdl_restringidos]
 
-        r = solve(self.kff, ff-self.kfc@uc)
-        
-        self.u[self.gdl_libres] = r
+        # Solucionar Kff uf = ff
+        uf = solve(self.Kff, ff - Kfc @ uc)
 
-        return 0
+        self.u[self.gdl_libres] = uf
+
+        self.has_solution = True
 
     def obtener_desplazamiento_nodal(self, n):
-        gdl = [3*n, 3*n+1, 3*n+2]
-        return self.u[gdl]	
+        if self.Ndimensiones == 2:
+            dofs = [2*n, 2*n+1]
+        elif self.Ndimensiones == 3:
+            dofs = [3*n, 3*n+1, 3*n+2]
+        else:
+            print(f"Error en numero de dimensiones. Ndimensiones = {self.Ndimensiones == 2} ")
+
+        return self.u[dofs]
 
 
     def obtener_fuerzas(self):
         
-        self.fuerzas = np.zeros((len(self.barras)), dtype=np.double)
+        fuerzas = np.zeros((len(self.barras)), dtype=np.double)
         for i,b in enumerate(self.barras):
-            self.fuerzas[i] = b.obtener_fuerza(self)
+            fuerzas[i] = b.obtener_fuerza(self)
 
-        return self.fuerzas
+        return fuerzas
 
 
-    def obtener_factores_de_utilizacion(self, f, ϕ=0.9):      
+    def obtener_factores_de_utilizacion(self, f, ϕ=0.9):
+        
         FU = np.zeros((len(self.barras)), dtype=np.double)
         for i,b in enumerate(self.barras):
             FU[i] = b.obtener_factor_utilizacion(f[i], ϕ)
 
         return FU
 
-
     def rediseñar(self, Fu, ϕ=0.9):
-        """Implementar"""	
-        
-        return 0
+        for i,b in enumerate(self.barras):
+           print(f"\n\nBarra {i}")
+           b.rediseñar(Fu[i], self, ϕ)
 
 
 
-    def chequear_diseño(self, Fu, ϕ=0.9):
+    def chequear_diseño(self, Fu, ϕ=0.9, silence=False):
         cumple = True
         for i,b in enumerate(self.barras):
-            if not b.chequear_diseño(Fu[i], self, ϕ):
-                print(f"----> Barra {i} no cumple algun criterio. ")
+            if not b.chequear_diseño(Fu[i], self, ϕ, silence=silence):
+                if not silence:
+                    print(f"----> Barra {i} no cumple algun criterio. ")
                 cumple = False
         return cumple
 
+
+
+
+
+
+
+
+
+
+
+
     def __str__(self):
-        #Nodos
-        s = "nodos: \n"
+        s = "nodos:\n"
+        for n in range(self.Nnodos):
+            s += f"  {n} : ( {self.xyz[n,0]}, {self.xyz[n,1]}, {self.xyz[n,2]}) \n "
+        s += "\n\n"
 
-        for i in range(len(self.xyz[0: self.Nnodos,:])):
-            s += "  " + str(i) + ": " + "(" + str(self.xyz[i,0]) + ", " + str(self.xyz[i,1]) + ", " + str(self.xyz[i,2]) + ")"
-            s+= "\n"
-        #parte en 0 y llega hasta Nnodos tomando todos los valores que estan ahí (:)
-
-        s += "\n"
-        s += "\n"
-
-        #Barras
-        s+= "barras: \n"
-
-        for i in range(len(self.barras)):
-            s += "  " + str(i) + ": " + "[ " + str(self.barras[i].ni) + " " + str(self.barras[i].nj) + " ]"
-            s += "\n"
+        s += "barras:\n"
+        for i, b in enumerate(self.barras):
+            n = b.obtener_conectividad()
+            s += f" {i} : [ {n[0]} {n[1]} ] \n"
+        s += "\n\n"
         
-        #Restricciones
-        s += "\n"
-        s+="restricciones: \n"
-
-        for clave in self.restricciones:
-            s += "  " + str(clave) + ": " + str(self.restricciones[clave]) + " " 
-            s += "\n"
-        s+="\n"
-
-        #Cargas 
-        #print(self.cargas)
-        s+="Cargas: \n"
-        for i in (self.cargas):
-            s += "  " + str(i) + ": " + str(self.cargas[i]) + " " 
-            s += "\n"             
-        s+="\n"
+        s += "restricciones:\n"
+        for nodo in self.restricciones:
+            s += f"{nodo} : {self.restricciones[nodo]}\n"
+        s += "\n\n"
         
-        #Desplazamientos
-        s+= "Desplazamientos: \n"
-        lk=0
-        Agrup=[]
-        for i in range(len(self.u)):
-            if lk>=(len(self.u)):
-                break
-            else:
-                des=[]
-                for l in range(3):
-                    des.append(self.u[lk])
-                    lk+=1
-            Agrup.append(des) 
-       
-        for p in range(len(Agrup)):
-             s += "  " + str(p) + ": " + "( " + str(Agrup[p][0])+", "+ str(Agrup[p][1])+", "+ str(Agrup[p][2]) + " )" 
-             s+="\n"
+        s += "cargas:\n"
+        for nodo in self.cargas:
+            s += f"{nodo} : {self.cargas[nodo]}\n"
+        s += "\n\n"
 
-                
-        s+= "\n" 
-    
-    
-        #Fuerzas
+        if self.has_solution:
+            s += "desplazamientos:\n"
+            if self.Ndimensiones == 2:
+                uvw = self.u.reshape((-1,2))
+                for n in range(self.Nnodos):
+                    s += f"  {n} : ( {uvw[n,0]}, {uvw[n,1]}) \n "
+            if self.Ndimensiones == 3:
+                uvw = self.u.reshape((-1,3))
+                for n in range(self.Nnodos):
+                    s += f"  {n} : ( {uvw[n,0]}, {uvw[n,1]}, {uvw[n,2]}) \n "
+        s += "\n\n"
+
+        if self.has_solution:
+            f = self.obtener_fuerzas()
+            s += "fuerzas:\n"
+            for b in range(len(self.barras)):
+                s += f"  {b} : {f[b]}\n"
         s += "\n"
-        s+="Fuerzas: \n"
-        for i in range((len(self.fuerzas))):
-            s += "  " + str(i) + ": " + str(self.fuerzas[i]) + " " 
-            s += "\n"
+        s += f"Ndimensiones = {self.Ndimensiones}"
 
         return s
 
+
+
     def guardar(self, nombre):
+        import h5py
 
-        #Guarda nodos xyz
+        fid = h5py.File(nombre, "w")
 
-        dataset = h5py.File(nombre, "w")
-        dataset["xyz"] = self.xyz            
+        fid["xyz"] = self.xyz
+
+        Nbarras = len(self.barras)
+        barras = np.zeros((Nbarras,2), dtype=np.int32)
+        secciones = fid.create_dataset("secciones", shape=(Nbarras,1), dtype=h5py.string_dtype())
+
+        for i, b in enumerate(self.barras):
+            barras[i,0] = b.ni
+            barras[i,1] = b.nj
+            secciones[i] = b.seccion.nombre()
+
+        fid["barras"] = barras
+
+        data_rest = fid.create_dataset("restricciones", (1,2), maxshape=(None,2), dtype=np.int32)
+        data_rest_val = fid.create_dataset("restricciones_val", (1,), maxshape=(None,), dtype=np.double)
+        nr = 0
+        for nodo in  self.restricciones:
+            for gdl, val in self.restricciones[nodo]:
+                data_rest.resize((nr+1,2))
+                data_rest_val.resize((nr+1,))
+                data_rest[nr, 0] = nodo
+                data_rest[nr, 1] = gdl
+                data_rest_val[nr] = val
+                nr += 1
 
 
-        #Guarda barras y sus secciones
-        
-        barras = np.zeros((len(self.barras),2), dtype = np.int32)
+        data_cargas = fid.create_dataset("cargas", (1,2), maxshape=(None,2), dtype=np.int32)
+        data_cargas_val = fid.create_dataset("cargas_val", (1,), maxshape=(None,), dtype=np.double)
+        nr = 0
+        for nodo in  self.cargas:
+            for gdl, val in self.cargas[nodo]:
+                data_cargas.resize((nr+1,2))
+                data_cargas_val.resize((nr+1,))
+                data_cargas[nr, 0] = nodo
+                data_cargas[nr, 1] = gdl
+                data_cargas_val[nr] = val
+                nr += 1
 
-        secciones = dataset.create_dataset("secciones", shape=((len(self.barras)),1), dtype= h5py.string_dtype())
-
-        for i,b in enumerate(self.barras):
-
-
-            barras[i, 0] = b.ni
-            barras[i, 1] = b.nj
-
-            secciones[i,0] = b.seccion.nombre()
-
-        dataset["barras"] = barras
-
-
-        cont = 0
-        for nodo in self.restricciones:
-            
-
-            for i in self.restricciones[nodo]:
-                
-                cont += 1
-
-                
-
-        restricciones1 = dataset.create_dataset("restricciones", shape=(cont,2), dtype= np.int32)
-
-        restricciones_val = dataset.create_dataset("restricciones_val", shape=(cont,1), dtype= np.double)
-        
-
-        cont = 0
-        for nodo in self.restricciones:
-
-            for i in self.restricciones[nodo]:
-                
-
-                restricciones1[cont, 0] = nodo
-                restricciones1[cont, 1] = i[0]
-                
-                restricciones_val[cont, 0] = i[1]
-                cont += 1
-        
-        cont = 0
-        print(f"cargas={self.cargas}")
-        
-
-        for nodo in self.cargas:
-             for i in self.cargas[nodo]:
-                cont += 1
-
-        
-        cargas1 = dataset.create_dataset("cargas", shape=(cont,2), dtype= np.int32)
-
-        cargas_val = dataset.create_dataset("cargas_val", shape=(cont,1), dtype = np.double)
-
-        cont = 0
-        for nodo in self.cargas:
-            for i in self.cargas[nodo]:
-                cargas1[cont, 0] = nodo
-                cargas1[cont, 1] = i[0]
-                cargas_val[cont, 0] = i[1]
-            cont += 1
 
     def abrir(self, nombre):
-        self.fid =h5py.File(nombre,"r")
-        coordenadas_nodos=self.fid["xyz"]
-        secciones=self.fid["secciones"]
-        barras=self.fid["barras"]
-        restricciones=self.fid["restricciones"]
-        restricciones_val=self.fid["restricciones_val"]
-        cargas=self.fid["cargas"]
-        cargas_val=self.fid["cargas_val"]
-        c1="#3A8431"
-        c2="#A3500B"
+        import h5py
+        from secciones import SeccionICHA
+        from barra import Barra
 
-        #Nodos
-        #print(coordenadas_nodos[:,:])
-        for i in coordenadas_nodos:
-            x=i[0]
-            #print(x)
-            y=i[1]
-            #print(y)
-            z=i[2]
-            #print(z)
-            self.agregar_nodo(x=x,y=y,z=z)
+        fid = h5py.File(nombre, "r")
 
-        #Crear y agregar las barras
-        cont1=0
-        lista = []
-        for seccion in secciones:
-            seccion = str(seccion[0])
-            seccion = seccion[2:-1]
-            a = SeccionICHA(seccion, color=c2)
-            if len(lista) != 0:
-                if lista[0].denominacion != seccion:
-                    a.color = c1
-            lista.append(a)
-            self.agregar_barra(Barra(barras[cont1][0], barras[cont1][1], a))
-            cont1+=1
+        xyz = fid["xyz"][:,:]
 
-        #Crear restricciones
-        cont2=0
-        for i in restricciones:
-            #print(f"restricciones={i}")
-            nodo=i[0]
-            gdl=i[1]
-            valor=restricciones_val[cont2]
-            self.agregar_restriccion(nodo, gdl, valor)
-            cont2+=1
+        Nnodos = xyz.shape[0]
 
-        #Agregar carga puntual
-        cont3=0
-        for i in cargas:
-            nodo=i[0]
-            gdl= i[1]
-            valor= cargas_val[cont3][0]
-            cont3+=1
-            #print(f"nodo, gdl, valor = {nodo}, {gdl}, {valor}")
-            self.agregar_fuerza(nodo, gdl, valor)
+        for i in range(Nnodos):
+            self.agregar_nodo(xyz[i,0], xyz[i,1], xyz[i,2])
 
+        barras = fid["barras"]
+        secciones = fid["secciones"]
+        cargas = fid["cargas"]
+        cargas_val = fid["cargas_val"]
+        restricciones = fid["restricciones"]
+        restricciones_val = fid["restricciones_val"]
 
+        Nbarras = fid["barras"].shape[0]
 
+        dict_secciones = {}
+
+        for i in range(Nbarras):
+            ni = barras[i,0]
+            nj = barras[i,1]
+
+            den = secciones[i][0]
+
+            if not den in dict_secciones:
+                dict_secciones[den] = SeccionICHA(den)
+
+            self.agregar_barra(Barra(ni,nj,dict_secciones[den]))
+            
+
+        for i in range(restricciones.shape[0]):
+            nodo = restricciones[i,0]
+            gdl = restricciones[i,1]
+            val = restricciones_val[i]
+
+            self.agregar_restriccion(nodo, gdl, val)
+
+        for i in range(cargas.shape[0]):
+            nodo = cargas[i,0]
+            gdl = cargas[i,1]
+            val = cargas_val[i]
+
+            self.agregar_fuerza(nodo, gdl, val)
