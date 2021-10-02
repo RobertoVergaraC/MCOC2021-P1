@@ -6,36 +6,158 @@ from math import sqrt
 from secciones import SeccionICHA
 
 L = 6.*m_
-H = 3.*m_
+H = 6.*m_
 B = 4.*m_
 
 q = 400*kgf_/m_**2
 
 F = B*L*q
 
+nodos_apoyo=open("posibles-apoyos-2021.txt","r")
+
+x = []
+z = []
+
+
+for i in nodos_apoyo:
+    valor=i.split(" ")
+    valor[0]=x.append(float(valor[0]))
+    valor[1]=z.append(float(valor[1]))
+
+
+xsum = 0 
+
+for n in range(len(x)):
+    print(f"coordenada x {n} = {x[n]}  -  z {n} = {z[n]}")
+
+    if n >= 7 and n <= 28:
+        xsum += x[n]
+
+
+
+
+
+
+
 #Inicializar modelo
 ret = Reticulado()
 
 #Nodos
-ret.agregar_nodo(0    ,0,0)
-ret.agregar_nodo(L    ,0,0)
-ret.agregar_nodo(2*L  ,0,0)
-ret.agregar_nodo(L/2  ,B/2,sqrt(3)*H)
-ret.agregar_nodo(3*L/2,B/2,sqrt(3)*H)
-ret.agregar_nodo(0    ,B,0)
-ret.agregar_nodo(L    ,B,0)
-ret.agregar_nodo(2*L  ,B,0)
+
+#TABLERO 											---- Parte Baja y = 0
+ret.agregar_nodo(x[7]*m_		- L		,0, z[7])
+ret.agregar_nodo(x[7]*m_	     		,0, z[7])
+ret.agregar_nodo(x[7]*m_	 	+ L		,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 2*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 3*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 4*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 5*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 6*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 7*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 8*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 9*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 10*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 11*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 12*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 13*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 14*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 15*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 16*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 17*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 18*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 19*L   	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 20*L   	,0, z[7])
+ret.agregar_nodo(x[28]*m_			 	,0, z[7])
+ret.agregar_nodo(x[7]*m_	 + 22*L   	,0, z[7])
+
+#TABLERO 											---- Parte Alta y = 0
+ret.agregar_nodo(x[7]*m_	 - L		,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	     		,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + L		,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 2*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 3*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 4*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 5*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 6*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 7*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 8*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 9*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 10*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 11*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 12*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 13*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 14*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 15*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 16*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 17*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 18*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 19*L   	,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 20*L   	,0, z[7] + H)
+ret.agregar_nodo(x[28]*m_  		 		,0, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 22*L   	,0, z[7] + H)
 
 
+#TABLERO 											---- Parte Baja y = 4 m
+ret.agregar_nodo(x[7]*m_	     		,B, z[7])
+ret.agregar_nodo(x[7]*m_	 - L		,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + L		,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 2*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 3*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 4*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 5*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 6*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 7*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 8*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 9*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 10*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 11*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 12*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 13*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 14*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 15*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 16*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 17*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 18*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 19*L   	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 20*L   	,B, z[7])
+ret.agregar_nodo(x[28]*m_			 	,B, z[7])
+ret.agregar_nodo(x[7]*m_	 + 22*L   	,B, z[7])
+
+#TABLERO 											---- Parte Alta y = 4 m
+ret.agregar_nodo(x[7]*m_	 - L		,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	     		,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + L		,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 2*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 3*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 4*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 5*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 6*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 7*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 8*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 9*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 10*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 11*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 12*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 13*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 14*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 15*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 16*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 17*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 18*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 19*L   	,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 20*L   	,B, z[7] + H)
+ret.agregar_nodo(x[28]*m_  		 		,B, z[7] + H)
+ret.agregar_nodo(x[7]*m_	 + 22*L   	,B, z[7] + H)
 
 
 #Secciones de las barras
-
 seccion_grande = SeccionICHA("[]350x150x37.8", color="#3A8431")#, debug=True)
 seccion_chica = SeccionICHA("[]80x40x8", color="#A3500B")
 
-
 #Crear y agregar las barras
+
+
+
 ret.agregar_barra(Barra(0, 1, seccion_chica)) #0
 ret.agregar_barra(Barra(1, 2, seccion_chica)) #1
 ret.agregar_barra(Barra(3, 4, seccion_grande)) #2

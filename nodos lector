@@ -1,0 +1,22 @@
+nodos_apoyo=open("posibles-apoyos-2021.txt","r")
+
+x = []
+y = []
+
+
+for i in nodos_apoyo:
+    valor=i.split(" ")
+    valor[0]=x.append(float(valor[0]))
+    valor[1]=y.append(float(valor[1]))
+
+
+xsum = 0 
+
+for n in range(len(x)):
+    print(f"coordenada x {n} = {x[n]}  -  y {n} = {y[n]}")
+
+    if n >= 7 and n <= 28:
+        xsum += x[n]
+
+
+print(f"n7 - n17 suma = {xsum} m ")
