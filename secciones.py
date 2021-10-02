@@ -109,12 +109,16 @@ class SeccionICHA(object):
 
     def buscador(self):
         #Lista del tipo [HR, 1118, 405, 517,7]
-        deno = self.denominacion
+        deno = (self.denominacion)
+        if type(deno) == str:
+            deno = (self.denominacion)
+        else:
+            deno = str(self.denominacion)
+            deno = deno[2:-1]
         for index, letter in enumerate(deno, 0):
-            if letter.isdigit():
+            if str(letter).isdigit():
                 deno = [deno[:index],deno[index:]]
                 break
-
         den = []
         den.append(deno[0])
         deno2 = deno[1].split('x')
