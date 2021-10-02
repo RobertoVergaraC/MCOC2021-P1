@@ -147,9 +147,9 @@ ret.agregar_nodo(x[7]*m_	 + 21*L   	,B, z[7] + H) # 91
 
 
 #Secciones de las barras
-seccion_grande = SeccionICHA("[]350x150x37.8", color="#3A8431")#, debug=True)
-seccion_chica = SeccionICHA("[]350x150x37.8", color="#A3500B")   #"[]80x40x8"
-seccion_extra = SeccionICHA("H1100x350x400.4", color="pink")
+seccion_grande = SeccionICHA("O310x300x5", color="#3A8431")#, debug=True) #O310x300x5
+seccion_chica = SeccionICHA("[]300x100x18.3", color="#A3500B")   #300x100x18.3
+seccion_extra = SeccionICHA("H400x150x47.6", color="pink")     #H400x150x47.6
 
 #Crear y agregar las barras
 
@@ -476,7 +476,6 @@ f_D = ret.obtener_fuerzas()
 total = ret.Nnodos
 for i in range(ret.Nnodos):
     ret.agregar_fuerza(i, 2, -F/total)
-print(F)
 
 #Resolver el problema peso_propio
 ret.ensamblar_sistema(factor_peso_propio=[0.,0.,0], factor_cargas=1.0)
