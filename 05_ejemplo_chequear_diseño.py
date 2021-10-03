@@ -150,6 +150,8 @@ ret.agregar_nodo(x[7]*m_	 + 21*L   	,B, z[7] + H) # 91
 seccion_grande = SeccionICHA("O310x300x5", color="#3A8431")#, debug=True) #O310x300x5
 seccion_chica = SeccionICHA("[]300x100x18.3", color="#A3500B")   #300x100x18.3
 seccion_extra = SeccionICHA("H400x150x47.6", color="pink")     #H400x150x47.6
+seccion_chica_2 = SeccionICHA("[]12x12x0.3", color="blue")
+seccion_chica_3 = SeccionICHA("[]100x50x8.5", color="black")
 
 #Crear y agregar las barras
 
@@ -297,99 +299,99 @@ ret.agregar_barra(Barra(89, 90, seccion_grande)) #132
 ret.agregar_barra(Barra(90, 91, seccion_grande)) #133
 
 #BARRAS DE INFERIORES
-ret.agregar_barra(Barra(0, 47, seccion_grande)) #134
-ret.agregar_barra(Barra(1, 46, seccion_grande)) #135
-ret.agregar_barra(Barra(1, 48, seccion_grande)) #136
-ret.agregar_barra(Barra(2, 47, seccion_grande)) #137
-ret.agregar_barra(Barra(3, 48, seccion_grande)) #138
-ret.agregar_barra(Barra(2, 49, seccion_grande)) #139
-ret.agregar_barra(Barra(3, 50, seccion_grande)) #140
-ret.agregar_barra(Barra(4, 49, seccion_grande)) #141
-ret.agregar_barra(Barra(5, 50, seccion_grande)) #142
-ret.agregar_barra(Barra(4, 51, seccion_grande)) #143
-ret.agregar_barra(Barra(6, 51, seccion_grande)) #144
-ret.agregar_barra(Barra(5, 52, seccion_grande)) #145
-ret.agregar_barra(Barra(7, 52, seccion_grande)) #146
-ret.agregar_barra(Barra(6, 53, seccion_grande)) #147
-ret.agregar_barra(Barra(8, 53, seccion_grande)) #148
-ret.agregar_barra(Barra(7, 54, seccion_grande)) #149
-ret.agregar_barra(Barra(9, 54, seccion_grande)) #150
-ret.agregar_barra(Barra(8, 55, seccion_grande)) #151
-ret.agregar_barra(Barra(10, 55, seccion_grande)) #152
-ret.agregar_barra(Barra(9, 56, seccion_grande)) #153
-ret.agregar_barra(Barra(11, 56, seccion_grande)) #154
-ret.agregar_barra(Barra(10, 57, seccion_grande)) #155
-ret.agregar_barra(Barra(12, 57, seccion_grande)) #156
+ret.agregar_barra(Barra(0, 47, seccion_chica_2)) #134
+ret.agregar_barra(Barra(1, 46, seccion_chica_2)) #135
+ret.agregar_barra(Barra(1, 48, seccion_chica_2)) #136
+ret.agregar_barra(Barra(2, 47, seccion_chica_2)) #137
+ret.agregar_barra(Barra(3, 48, seccion_chica_2)) #138
+ret.agregar_barra(Barra(2, 49, seccion_chica_2)) #139
+ret.agregar_barra(Barra(3, 50, seccion_chica_2)) #140
+ret.agregar_barra(Barra(4, 49, seccion_chica_2)) #141
+ret.agregar_barra(Barra(5, 50, seccion_chica_2)) #142
+ret.agregar_barra(Barra(4, 51, seccion_chica_2)) #143
+ret.agregar_barra(Barra(6, 51, seccion_chica_2)) #144
+ret.agregar_barra(Barra(5, 52, seccion_chica_2)) #145
+ret.agregar_barra(Barra(7, 52, seccion_chica_2)) #146
+ret.agregar_barra(Barra(6, 53, seccion_chica_2)) #147
+ret.agregar_barra(Barra(8, 53, seccion_chica_2)) #148
+ret.agregar_barra(Barra(7, 54, seccion_chica_2)) #149
+ret.agregar_barra(Barra(9, 54, seccion_chica_2)) #150
+ret.agregar_barra(Barra(8, 55, seccion_chica_2)) #151
+ret.agregar_barra(Barra(10, 55, seccion_chica_2)) #152
+ret.agregar_barra(Barra(9, 56, seccion_chica_2)) #153
+ret.agregar_barra(Barra(11, 56, seccion_chica_2)) #154
+ret.agregar_barra(Barra(10, 57, seccion_chica_2)) #155
+ret.agregar_barra(Barra(12, 57, seccion_chica_2)) #156
 
-ret.agregar_barra(Barra(11, 58, seccion_grande)) #157
-ret.agregar_barra(Barra(12, 57, seccion_grande)) #158
-ret.agregar_barra(Barra(13, 58, seccion_grande)) #159
-ret.agregar_barra(Barra(12, 59, seccion_grande)) #160
-ret.agregar_barra(Barra(14, 59, seccion_grande)) #161
-ret.agregar_barra(Barra(13, 60, seccion_grande)) #162
-ret.agregar_barra(Barra(15, 60, seccion_grande)) #163
-ret.agregar_barra(Barra(14, 61, seccion_grande)) #164
-ret.agregar_barra(Barra(16, 61, seccion_grande)) #165
-ret.agregar_barra(Barra(15, 62, seccion_grande)) #166
-ret.agregar_barra(Barra(17, 62, seccion_grande)) #167
-ret.agregar_barra(Barra(16, 63, seccion_grande)) #168
-ret.agregar_barra(Barra(18, 63, seccion_grande)) #169
-ret.agregar_barra(Barra(17, 64, seccion_grande)) #170
-ret.agregar_barra(Barra(19, 64, seccion_grande)) #171
-ret.agregar_barra(Barra(18, 65, seccion_grande)) #172
-ret.agregar_barra(Barra(20, 65, seccion_grande)) #173
-ret.agregar_barra(Barra(19, 66, seccion_grande)) #174
-ret.agregar_barra(Barra(21, 66, seccion_grande)) #175
-ret.agregar_barra(Barra(20, 67, seccion_grande)) #176
-ret.agregar_barra(Barra(22, 67, seccion_grande)) #177
-ret.agregar_barra(Barra(21, 68, seccion_grande)) #178
+ret.agregar_barra(Barra(11, 58, seccion_chica_2)) #157
+ret.agregar_barra(Barra(12, 57, seccion_chica_2)) #158
+ret.agregar_barra(Barra(13, 58, seccion_chica_2)) #159
+ret.agregar_barra(Barra(12, 59, seccion_chica_2)) #160
+ret.agregar_barra(Barra(14, 59, seccion_chica_2)) #161
+ret.agregar_barra(Barra(13, 60, seccion_chica_2)) #162
+ret.agregar_barra(Barra(15, 60, seccion_chica_2)) #163
+ret.agregar_barra(Barra(14, 61, seccion_chica_2)) #164
+ret.agregar_barra(Barra(16, 61, seccion_chica_2)) #165
+ret.agregar_barra(Barra(15, 62, seccion_chica_2)) #166
+ret.agregar_barra(Barra(17, 62, seccion_chica_2)) #167
+ret.agregar_barra(Barra(16, 63, seccion_chica_2)) #168
+ret.agregar_barra(Barra(18, 63, seccion_chica_2)) #169
+ret.agregar_barra(Barra(17, 64, seccion_chica_2)) #170
+ret.agregar_barra(Barra(19, 64, seccion_chica_2)) #171
+ret.agregar_barra(Barra(18, 65, seccion_chica_2)) #172
+ret.agregar_barra(Barra(20, 65, seccion_chica_2)) #173
+ret.agregar_barra(Barra(19, 66, seccion_chica_2)) #174
+ret.agregar_barra(Barra(21, 66, seccion_chica_2)) #175
+ret.agregar_barra(Barra(20, 67, seccion_chica_2)) #176
+ret.agregar_barra(Barra(22, 67, seccion_chica_2)) #177
+ret.agregar_barra(Barra(21, 68, seccion_chica_2)) #178
 
 #BARRAS DE FRENTE SUPERIORES
-ret.agregar_barra(Barra(69, 24, seccion_grande)) #179
-ret.agregar_barra(Barra(70, 23, seccion_grande)) #180
-ret.agregar_barra(Barra(70, 25, seccion_grande)) #181
-ret.agregar_barra(Barra(71, 24, seccion_grande)) #182
-ret.agregar_barra(Barra(71, 26, seccion_grande)) #183
-ret.agregar_barra(Barra(72, 25, seccion_grande)) #184
-ret.agregar_barra(Barra(72, 27, seccion_grande)) #185
-ret.agregar_barra(Barra(73, 26, seccion_grande)) #186
-ret.agregar_barra(Barra(73, 28, seccion_grande)) #187
-ret.agregar_barra(Barra(74, 27, seccion_grande)) #188
-ret.agregar_barra(Barra(74, 29, seccion_grande)) #189
-ret.agregar_barra(Barra(75, 28, seccion_grande)) #190
-ret.agregar_barra(Barra(75, 30, seccion_grande)) #191
-ret.agregar_barra(Barra(76, 29, seccion_grande)) #192
-ret.agregar_barra(Barra(76, 31, seccion_grande)) #193
-ret.agregar_barra(Barra(77, 30, seccion_grande)) #194
-ret.agregar_barra(Barra(77, 32, seccion_grande)) #195
-ret.agregar_barra(Barra(78, 31, seccion_grande)) #196
-ret.agregar_barra(Barra(78, 33, seccion_grande)) #197
-ret.agregar_barra(Barra(79, 32, seccion_grande)) #198
-ret.agregar_barra(Barra(79, 34, seccion_grande)) #199
-ret.agregar_barra(Barra(80, 33, seccion_grande)) #200
-ret.agregar_barra(Barra(80, 35, seccion_grande)) #201
+ret.agregar_barra(Barra(69, 24, seccion_chica_2)) #179
+ret.agregar_barra(Barra(70, 23, seccion_chica_2)) #180
+ret.agregar_barra(Barra(70, 25, seccion_chica_2)) #181
+ret.agregar_barra(Barra(71, 24, seccion_chica_2)) #182
+ret.agregar_barra(Barra(71, 26, seccion_chica_2)) #183
+ret.agregar_barra(Barra(72, 25, seccion_chica_2)) #184
+ret.agregar_barra(Barra(72, 27, seccion_chica_2)) #185
+ret.agregar_barra(Barra(73, 26, seccion_chica_2)) #186
+ret.agregar_barra(Barra(73, 28, seccion_chica_2)) #187
+ret.agregar_barra(Barra(74, 27, seccion_chica_2)) #188
+ret.agregar_barra(Barra(74, 29, seccion_chica_2)) #189
+ret.agregar_barra(Barra(75, 28, seccion_chica_2)) #190
+ret.agregar_barra(Barra(75, 30, seccion_chica_2)) #191
+ret.agregar_barra(Barra(76, 29, seccion_chica_2)) #192
+ret.agregar_barra(Barra(76, 31, seccion_chica_2)) #193
+ret.agregar_barra(Barra(77, 30, seccion_chica_2)) #194
+ret.agregar_barra(Barra(77, 32, seccion_chica_2)) #195
+ret.agregar_barra(Barra(78, 31, seccion_chica_2)) #196
+ret.agregar_barra(Barra(78, 33, seccion_chica_2)) #197
+ret.agregar_barra(Barra(79, 32, seccion_chica_2)) #198
+ret.agregar_barra(Barra(79, 34, seccion_chica_2)) #199
+ret.agregar_barra(Barra(80, 33, seccion_chica_2)) #200
+ret.agregar_barra(Barra(80, 35, seccion_chica_2)) #201
 
-ret.agregar_barra(Barra(81, 34, seccion_grande)) #202
-ret.agregar_barra(Barra(81, 36, seccion_grande)) #203
-ret.agregar_barra(Barra(82, 35, seccion_grande)) #204
-ret.agregar_barra(Barra(82, 37, seccion_grande)) #205
-ret.agregar_barra(Barra(83, 36, seccion_grande)) #206
-ret.agregar_barra(Barra(83, 38, seccion_grande)) #207
-ret.agregar_barra(Barra(84, 37, seccion_grande)) #208
-ret.agregar_barra(Barra(84, 39, seccion_grande)) #209
-ret.agregar_barra(Barra(85, 38, seccion_grande)) #210
-ret.agregar_barra(Barra(85, 40, seccion_grande)) #211
-ret.agregar_barra(Barra(86, 39, seccion_grande)) #212
-ret.agregar_barra(Barra(86, 41, seccion_grande)) #213
-ret.agregar_barra(Barra(87, 40, seccion_grande)) #214
-ret.agregar_barra(Barra(87, 42, seccion_grande)) #215
-ret.agregar_barra(Barra(88, 41, seccion_grande)) #216
-ret.agregar_barra(Barra(88, 43, seccion_grande)) #217
-ret.agregar_barra(Barra(89, 42, seccion_grande)) #218
-ret.agregar_barra(Barra(89, 44, seccion_grande)) #219
-ret.agregar_barra(Barra(90, 43, seccion_grande)) #220
-ret.agregar_barra(Barra(90, 45, seccion_grande)) #221
-ret.agregar_barra(Barra(91, 44, seccion_grande)) #222
+ret.agregar_barra(Barra(81, 34, seccion_chica_2)) #202
+ret.agregar_barra(Barra(81, 36, seccion_chica_2)) #203
+ret.agregar_barra(Barra(82, 35, seccion_chica_2)) #204
+ret.agregar_barra(Barra(82, 37, seccion_chica_2)) #205
+ret.agregar_barra(Barra(83, 36, seccion_chica_2)) #206
+ret.agregar_barra(Barra(83, 38, seccion_chica_2)) #207
+ret.agregar_barra(Barra(84, 37, seccion_chica_2)) #208
+ret.agregar_barra(Barra(84, 39, seccion_chica_2)) #209
+ret.agregar_barra(Barra(85, 38, seccion_chica_2)) #210
+ret.agregar_barra(Barra(85, 40, seccion_chica_2)) #211
+ret.agregar_barra(Barra(86, 39, seccion_chica_2)) #212
+ret.agregar_barra(Barra(86, 41, seccion_chica_2)) #213
+ret.agregar_barra(Barra(87, 40, seccion_chica_2)) #214
+ret.agregar_barra(Barra(87, 42, seccion_chica_2)) #215
+ret.agregar_barra(Barra(88, 41, seccion_chica_2)) #216
+ret.agregar_barra(Barra(88, 43, seccion_chica_2)) #217
+ret.agregar_barra(Barra(89, 42, seccion_chica_2)) #218
+ret.agregar_barra(Barra(89, 44, seccion_chica_2)) #219
+ret.agregar_barra(Barra(90, 43, seccion_chica_2)) #220
+ret.agregar_barra(Barra(90, 45, seccion_chica_2)) #221
+ret.agregar_barra(Barra(91, 44, seccion_chica_2)) #222
 
 #DIAGONALES
 ret.agregar_barra(Barra(23, 1, seccion_extra)) #223
@@ -401,18 +403,18 @@ ret.agregar_barra(Barra(28, 6, seccion_chica)) #228
 ret.agregar_barra(Barra(29, 7, seccion_chica)) #229
 ret.agregar_barra(Barra(30, 8, seccion_chica)) #230
 ret.agregar_barra(Barra(31, 9, seccion_chica)) #231
-ret.agregar_barra(Barra(32, 10, seccion_chica)) #232
-ret.agregar_barra(Barra(33, 11, seccion_chica)) #233
-ret.agregar_barra(Barra(34, 12, seccion_chica)) #234
-ret.agregar_barra(Barra(35, 13, seccion_chica)) #235
-ret.agregar_barra(Barra(36, 14, seccion_chica)) #236
-ret.agregar_barra(Barra(37, 15, seccion_chica)) #237
-ret.agregar_barra(Barra(33, 9, seccion_chica)) #238
-ret.agregar_barra(Barra(34, 10, seccion_chica)) #239
-ret.agregar_barra(Barra(35, 11, seccion_chica)) #240
-ret.agregar_barra(Barra(36, 12, seccion_chica)) #241
-ret.agregar_barra(Barra(37, 13, seccion_chica)) #242
-ret.agregar_barra(Barra(38, 14, seccion_chica)) #243
+# ret.agregar_barra(Barra(32, 10, seccion_chica_3)) #232
+# ret.agregar_barra(Barra(33, 11, seccion_chica_3)) #233
+# ret.agregar_barra(Barra(34, 12, seccion_chica_3)) #234
+ret.agregar_barra(Barra(35, 13, seccion_chica_3)) #235
+ret.agregar_barra(Barra(36, 14, seccion_chica_3)) #236
+ret.agregar_barra(Barra(37, 15, seccion_chica_3)) #237
+ret.agregar_barra(Barra(33, 9, seccion_chica_3)) #238
+ret.agregar_barra(Barra(34, 10, seccion_chica_3)) #239
+ret.agregar_barra(Barra(35, 11, seccion_chica_3)) #240
+# ret.agregar_barra(Barra(36, 12, seccion_chica_3)) #241
+# ret.agregar_barra(Barra(37, 13, seccion_chica_3)) #242
+# ret.agregar_barra(Barra(38, 14, seccion_chica_3)) #243
 ret.agregar_barra(Barra(39, 15, seccion_chica)) #244
 ret.agregar_barra(Barra(40, 16, seccion_chica)) #245
 ret.agregar_barra(Barra(41, 17, seccion_chica)) #246
@@ -429,18 +431,18 @@ ret.agregar_barra(Barra(74, 52, seccion_chica)) #256
 ret.agregar_barra(Barra(75, 53, seccion_chica)) #257
 ret.agregar_barra(Barra(76, 54, seccion_chica)) #258
 ret.agregar_barra(Barra(77, 55, seccion_chica)) #259
-ret.agregar_barra(Barra(78, 56, seccion_chica)) #260
-ret.agregar_barra(Barra(79, 57, seccion_chica)) #261
-ret.agregar_barra(Barra(80, 58, seccion_chica)) #262
-ret.agregar_barra(Barra(81, 59, seccion_chica)) #263
-ret.agregar_barra(Barra(82, 60, seccion_chica)) #264
-ret.agregar_barra(Barra(83, 61, seccion_chica)) #265
-ret.agregar_barra(Barra(79, 55, seccion_chica)) #266
-ret.agregar_barra(Barra(80, 56, seccion_chica)) #267
-ret.agregar_barra(Barra(81, 57, seccion_chica)) #268
-ret.agregar_barra(Barra(82, 58, seccion_chica)) #269
-ret.agregar_barra(Barra(83, 59, seccion_chica)) #270
-ret.agregar_barra(Barra(84, 60, seccion_chica)) #271
+# ret.agregar_barra(Barra(78, 56, seccion_chica_3)) #260
+# ret.agregar_barra(Barra(79, 57, seccion_chica_3)) #261
+# ret.agregar_barra(Barra(80, 58, seccion_chica_3)) #262
+ret.agregar_barra(Barra(81, 59, seccion_chica_3)) #263
+ret.agregar_barra(Barra(82, 60, seccion_chica_3)) #264
+ret.agregar_barra(Barra(83, 61, seccion_chica_3)) #265
+ret.agregar_barra(Barra(79, 55, seccion_chica_3)) #266
+ret.agregar_barra(Barra(80, 56, seccion_chica_3)) #267
+ret.agregar_barra(Barra(81, 57, seccion_chica_3)) #268
+# ret.agregar_barra(Barra(82, 58, seccion_chica_3)) #269
+# ret.agregar_barra(Barra(83, 59, seccion_chica_3)) #270
+# ret.agregar_barra(Barra(84, 60, seccion_chica_3)) #271
 ret.agregar_barra(Barra(85, 61, seccion_chica)) #272
 ret.agregar_barra(Barra(86, 62, seccion_chica)) #273
 ret.agregar_barra(Barra(87, 63, seccion_chica)) #274
@@ -573,7 +575,7 @@ ver_reticulado_3d(ret,
 	titulo="Factor Utilizacion")
 
 
-ret.guardar("05_ejemplo_chequear_diseño.h5")
+ret.guardar("GRUPO_10_FINAL.h5")
 
 print(f"DESPLAZAMIENTOS: {ret.u}")
 print(f"\nFACTOR DE UTILIZACIÓN: {factores_de_utilizacion}")
