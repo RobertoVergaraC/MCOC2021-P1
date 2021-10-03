@@ -574,3 +574,6 @@ ver_reticulado_3d(ret,
 
 
 ret.guardar("05_ejemplo_chequear_diseño.h5")
+
+print(f"DESPLAZAMIENTOS: {ret.u}")
+print(f"\nFACTOR DE UTILIZACIÓN: {factores_de_utilizacion}")
