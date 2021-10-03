@@ -27,7 +27,7 @@ Su peso fue de :
 
 ![PESO PRIMERO](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/PESO%20FINAL.jpg)
 
-*¿Como eran los factores de utilización y las deformaciones?
+*¿Como eran los factores de utilización y las deformaciones?*
 
 ###Desplazamientos:  
 
