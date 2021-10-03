@@ -110,8 +110,9 @@ Su peso fue de :
 
 *Cambios y Ajustes al diseño:*
 
-1° Se buscaron secciones que generaran la resistencia del puente correctamente al peso vivo predeterminado para el diseño. 
-2° Una vez conseguido el soporte de las cargas distribuidas en el puente diseñado con 3 tipos de secciones, se fue buscando secciones para el mismo diseño pero con menor pesos propios, consiguiendo un puente que cumpliera con las solicitaciones de cargas, y se optimizara el uso de acero.
+1° Se buscaron secciones que generaran la resistencia del puente correctamente al peso vivo predeterminado para el diseño.  
+2° Una vez conseguido el soporte de las cargas distribuidas en el puente diseñado con 3 tipos de secciones, se fue buscando secciones para el mismo diseño pero con menor pesos propios, consiguiendo un puente que cumpliera con las solicitaciones de cargas, y se optimizara el uso de acero.  
+3° Sacar barras que no estaban soportando peso y reducir el peso de las barras que simplemente estaban por estructura y no para soportar cargas
 
 El Diseño final queda finalmente:
 | VISTA | GRÁFICO |
