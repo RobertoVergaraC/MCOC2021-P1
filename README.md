@@ -106,6 +106,7 @@ Su peso fue de :
           2.21015686e-01 2.72303994e-01 3.23592301e-01 3.74880609e-01 4.26168916e-01 3.90682231e-01 1.10341841e-01 ]
      
 ![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/Factor%20Utilizaci%C3%B3n.jpg)
+Considerando que el factor de utilización  corresponde al cuociente entre "lo que tiene que resistir" y "lo que resiste" , se espera un valor Fu que varía entre [0,1] siendo el valor 1 aquel en el que se consigue la máxima eficiencia , puesto que no se  utilizan recursos de manera innecesaria para la fabricación del elemento. Mient
 
 
 *Cambios y Ajustes al diseño:*
