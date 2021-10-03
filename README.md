@@ -8,6 +8,9 @@ Optimización estructural de un puente reticular
 El diseño inicial fue realizado tras consultar a un profesional, el cual nos aconsejo en la forma y distribución de diagonales y perfiles en general en todo el puente. Con eso llegamos a que el puente debía optmizar la repartición de cargas lo mejor posible, y para eso se debía ntentar conseguir secciones de reticulado cuadradas, dentro de lo posible.
 
 El diseño resultante es el siguiente:
+| VISTA GENERAL | VISTA HORIZONTAL | VISTA EN ALTURA |
+| ------------- | ------------- | ------------- |
+| [general](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20GENERAL.jpg) | ![horizontal](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DE%20LADO.jpg)  | ![altura](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DESDE%20ARRIBA.jpg) |
 
 
 
@@ -20,6 +23,8 @@ Usando 3 tipos de secciones en su estructura:
 
 Su peso fue de : 
 
+![PESO PRIMERO](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/PESO%20FINAL.jpg)
+
 *¿Como eran los factores de utilización y las deformaciones?
 
 
@@ -30,9 +35,7 @@ Su peso fue de :
 1° Se buscaron secciones que generaran la resistencia del puente correctamente al peso vivo predeterminado para el diseño. 
 2° Una vez conseguido el soporte de las cargas distribuidas en el puente diseñado con 3 tipos de secciones, se fue buscando secciones para el mismo diseño pero con menor pesos propios, consiguiendo un puente que cumpliera con las solicitaciones de cargas, y se optimizara el uso de acero.
 
-El Diseño final es el siguiente:
-
-
+El Diseño final es el mismo inicial, pero con barras secciones diferentes;
 
 el cual esta compuesto por las secciones:
 
@@ -44,6 +47,7 @@ el cual esta compuesto por las secciones:
 
 Con un peso final de :
 
+![PESO PRIMERO](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/%C3%9ALTIMO/PESO%20FINAL.jpg)
 
 
 
