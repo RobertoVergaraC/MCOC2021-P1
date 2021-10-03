@@ -29,7 +29,7 @@ Su peso fue de :
 
 *¿Como eran los factores de utilización y las deformaciones?*
 
-###Desplazamientos:  
+###Desplazamientos:###
 
      [0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
       0.00000000e+00  0.00000000e+00 -8.56604595e-04 -1.27190710e-03
@@ -101,7 +101,7 @@ Su peso fue de :
      -3.85286266e-01 -1.66294870e-02 -1.40915374e-02  2.00798276e-01
      -2.44526637e-03 -4.77675691e-03 -4.02487016e-01  4.49692883e-03]
      
- ###Factor de Utilización:
+ ###Factor de Utilización:###
 
      [0.00000000e+00 1.24728227e-01 9.69331652e-01 6.51334521e-01
      3.72532770e-01 1.27068259e-01 7.92008717e-02 2.52132763e-01
@@ -177,7 +177,7 @@ Su peso fue de :
 ![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/Factor%20Utilizaci%C3%B3n.jpg)
 
 
-*Cambios y Ajustes al diseño:
+*Cambios y Ajustes al diseño:*
 
 1° Se buscaron secciones que generaran la resistencia del puente correctamente al peso vivo predeterminado para el diseño. 
 2° Una vez conseguido el soporte de las cargas distribuidas en el puente diseñado con 3 tipos de secciones, se fue buscando secciones para el mismo diseño pero con menor pesos propios, consiguiendo un puente que cumpliera con las solicitaciones de cargas, y se optimizara el uso de acero.
@@ -198,7 +198,9 @@ Con un peso final de :
 
 Obteniendo deformaciones y factores de utilización de:
 
-     DESPLAZAMIENTOS: [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+###DESPLAZAMIENTOS:### 
+
+      [0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
        0.00000000e+00  0.00000000e+00 -5.98534463e-03 -8.74324537e-03
       -4.52713325e-02 -1.14009477e-02  3.86758856e-04 -9.80331838e-02
       -1.45519357e-02 -4.87371846e-03 -1.53936543e-01 -1.60498531e-02
@@ -268,7 +270,7 @@ Obteniendo deformaciones y factores de utilización de:
        1.60237484e-02 -2.85978360e-02 -2.40562139e-02  1.11775029e-01
       -2.55930973e-03 -1.54219905e-02 -0.00000000e+00  4.15864848e-03]
      
- #FACTOR DE UTILIZACIÓN:#
+###FACTOR DE UTILIZACIÓN:###
       
      [0.00000000e+00 8.67351843e-01 7.84919189e-01 4.56846105e-01
       2.17349793e-01 3.80699073e-02 2.04912836e-01 3.87679152e-01
