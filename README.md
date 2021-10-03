@@ -29,7 +29,7 @@ Su peso fue de :
 
 *¿Como eran los factores de utilización y las deformaciones?*
 
-###Desplazamientos:###
+## Desplazamientos:
 
      [0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
       0.00000000e+00  0.00000000e+00 -8.56604595e-04 -1.27190710e-03
@@ -101,7 +101,7 @@ Su peso fue de :
      -3.85286266e-01 -1.66294870e-02 -1.40915374e-02  2.00798276e-01
      -2.44526637e-03 -4.77675691e-03 -4.02487016e-01  4.49692883e-03]
      
- ###Factor de Utilización:###
+## Factor de Utilización:
 
      [0.00000000e+00 1.24728227e-01 9.69331652e-01 6.51334521e-01
      3.72532770e-01 1.27068259e-01 7.92008717e-02 2.52132763e-01
@@ -198,7 +198,7 @@ Con un peso final de :
 
 Obteniendo deformaciones y factores de utilización de:
 
-###DESPLAZAMIENTOS:### 
+## Desplazamientos:
 
       [0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
        0.00000000e+00  0.00000000e+00 -5.98534463e-03 -8.74324537e-03
@@ -269,8 +269,9 @@ Obteniendo deformaciones y factores de utilización de:
       -2.92528834e-02  1.10401058e-01 -7.97426481e-02 -2.67661865e-02
        1.60237484e-02 -2.85978360e-02 -2.40562139e-02  1.11775029e-01
       -2.55930973e-03 -1.54219905e-02 -0.00000000e+00  4.15864848e-03]
-     
-###FACTOR DE UTILIZACIÓN:###
+      ## Factor de Utilización:
+
+## Factor de Utilización:
       
      [0.00000000e+00 8.67351843e-01 7.84919189e-01 4.56846105e-01
       2.17349793e-01 3.80699073e-02 2.04912836e-01 3.87679152e-01
