@@ -3,7 +3,7 @@ Optimización estructural de un puente reticular
 
 # Entrega 7 - Diseño Puente
 
-*¿Cual fue su diseño inicial? 
+* ¿Cual fue su diseño inicial? 
 
 El diseño inicial fue realizado tras consultar a un profesional, el cual nos aconsejo en la forma y distribución de diagonales y perfiles en general en todo el puente. Con eso llegamos a que el puente debía optmizar la repartición de cargas lo mejor posible, y para eso se debía ntentar conseguir secciones de reticulado cuadradas, dentro de lo posible.
 
