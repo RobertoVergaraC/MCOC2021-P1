@@ -8,9 +8,11 @@ Optimización estructural de un puente reticular
 El diseño inicial fue realizado tras consultar a un profesional, el cual nos aconsejo en la forma y distribución de diagonales y perfiles en general en todo el puente. Con eso llegamos a que el puente debía optmizar la repartición de cargas lo mejor posible, y para eso se debía ntentar conseguir secciones de reticulado cuadradas, dentro de lo posible.
 
 El diseño resultante es el siguiente:
-| VISTA GENERAL | VISTA HORIZONTAL | VISTA EN ALTURA |
-| ------------- | ------------- | ------------- |
-| [general](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20GENERAL.jpg) | ![horizontal](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DE%20LADO.jpg)  | ![altura](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DESDE%20ARRIBA.jpg) |
+| VISTA | GRÁFICO |
+| ------------- | ------------- |
+| GENERAL | ![general](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20GENERAL.jpg) |
+| HORIZONTAL | ![horizontal](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DE%20LADO.jpg) |
+| VERTICAL | ![altura](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20DESDE%20ARRIBA.jpg) |
 
 
 
