@@ -123,12 +123,11 @@ El Diseño final queda finalmente:
 
 el cual esta compuesto por las secciones:
 
-- seccion_grande = SeccionICHA("O310x300x5", color="#3A8431")#, debug=True) #O310x300x5     [Verde]
-- seccion_chica = SeccionICHA("[]300x100x18.3", color="#A3500B")   #300x100x18.3            [Naranja]
-- seccion_extra = SeccionICHA("H400x150x47.6", color="pink")     #H400x150x47.6             [Rosado]
-- seccion_chica_2 = SeccionICHA("[]12x12x0.3", color="blue")                                [Azul]
-. seccion_chica_3 = SeccionICHA("[]100x50x8.5", color="black")                              [Negro]
-
+- seccion_grande = SeccionICHA("O310x300x5", color="#3A8431")                                [Verde]  
+- seccion_chica = SeccionICHA("[]300x100x18.3", color="#A3500B")                             [Naranja]  
+- seccion_extra = SeccionICHA("H400x150x47.6", color="pink")                                 [Rosado]  
+- seccion_chica_2 = SeccionICHA("[]12x12x0.3", color="blue")                                 [Azul]  
+. seccion_chica_3 = SeccionICHA("[]100x50x8.5", color="black")                               [Negro]  
 
 
 Con un peso final de :
