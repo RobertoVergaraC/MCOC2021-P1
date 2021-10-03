@@ -110,7 +110,7 @@ class SeccionICHA(object):
     def buscador(self):
         #Lista del tipo [HR, 1118, 405, 517,7]
         deno = (self.denominacion)
-        if type(deno) == str:
+        if deno[0] != 'b':
             deno = (self.denominacion)
         else:
             deno = str(self.denominacion)

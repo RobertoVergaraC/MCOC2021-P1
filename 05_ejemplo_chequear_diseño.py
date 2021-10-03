@@ -491,7 +491,7 @@ opciones_nodos = {
 
 opciones_barras = {
 	"color_barras_por_dato": True,
-	"ver_dato_en_barras" : True,
+	"ver_dato_en_barras" : False,
 	"dato":f_L
 }
 
@@ -508,7 +508,7 @@ opciones_nodos = {
 
 opciones_barras = {
 	"color_barras_por_dato": True,
-	"ver_dato_en_barras" : True,
+	"ver_dato_en_barras" : False,
 	"dato":f_D
 }
 
@@ -530,7 +530,7 @@ opciones_nodos = {
 
 opciones_barras = {
 	"color_barras_por_dato": True,
-	"ver_dato_en_barras" : True,
+	"ver_dato_en_barras" : False,
 	"dato":fu
 }
 
@@ -562,7 +562,7 @@ opciones_nodos = {
 
 opciones_barras = {
 	"color_barras_por_dato": True,
-	"ver_dato_en_barras" : True,
+	"ver_dato_en_barras" : False,
 	"dato":factores_de_utilizacion
 }
 

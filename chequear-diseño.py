@@ -13,7 +13,7 @@ ret = Reticulado()
 
 # nombre_archivo = "g06_4063_1540840_Grupo_06.h5"
 #nombre_archivo = "g07_2725_1540552_05_ejemplo_chequear_diseño.h5"
-nombre_archivo = "Bonus_G8.h5"
+nombre_archivo = "05_ejemplo_chequear_diseño.h5"
 
 if len(sys.argv) > 1:
 	nombre_archivo = sys.argv[1]
