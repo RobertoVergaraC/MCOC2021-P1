@@ -105,9 +105,10 @@ Su peso fue de :
           6.61758829e-02 1.05991354e-01 6.09600059e-02 2.63369642e-02 1.14542289e-03 2.43202017e-02 5.18144972e-02 6.35864613e-02
           2.21015686e-01 2.72303994e-01 3.23592301e-01 3.74880609e-01 4.26168916e-01 3.90682231e-01 1.10341841e-01 ]
      
-![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/Factor%20Utilizaci%C3%B3n.jpg)
-Considerando que el factor de utilización  corresponde al cuociente entre "lo que tiene que resistir" y "lo que resiste" , se espera un valor Fu que varía entre [0,1] siendo el valor 1 aquel en el que se consigue la máxima eficiencia , puesto que no se  utilizan recursos de manera innecesaria para la fabricación del elemento. Mient
+![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/PRIMERO/Factor%20Utilizaci%C3%B3n.jpg)  
 
+Considerando que el factor de utilización  corresponde al cuociente entre "lo que tiene que resistir" y "lo que resiste" , se espera un valor Fu que varía entre (0,1] siendo 1 el valor de máxima eficiencia, puesto que no se están utilizando recursos innecesarios para la obtención de resistencia en el elemento. (Para ser conservadores en el diseño, se suele utilizar un Fu=[0.6, 0.8]). Por el otro lado, para valores cercanos a 0, se tiene que el diseño es ineficiente en cuanto a costo v/s resistencia, puesto que el elemento en cuestión resiste mucho más de lo solicitado y por tanto.
+En la imagen anterior, observamos una estimación del valor FU  de cada barra  en el reticulado . Aquella estimación se representa mediante el color en que es graficado cada elemento, siendo el negro  aquel color que representa un valor FU cercano a 0 y por  tanto que resiste lo solicitado, pero de manera inneficiente. Por otro lado el azul representa valores intermedios  [0.6,0.8] eficientes y el rojo representa valores demasiado cercanos al límite  en los que ocurre la falla o son poco conservadores. En  la image  anterior, observamos  que hay muchas barras negras, las que si bien cumplen con la solicitación de cargas, se les puede reducir la resistencia y hacer más eficiente la estructura. (se les puede reducir la resistencia y por tanto disminuir los kg de acero utilizado).-  
 
 *Cambios y Ajustes al diseño:*
 
@@ -214,7 +215,9 @@ Obteniendo deformaciones y factores de utilización de:
      9.04149533e-01 8.24459366e-01 8.27435748e-01]
   
  
-![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/%C3%9ALTIMO/Factor%20de%20Utilizaci%C3%B3n.jpg)
+![fu](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/%C3%9ALTIMO/Factor%20de%20Utilizaci%C3%B3n.jpg)  
+En la imagen anterior, notamos una mayor cantidad de barras azules y por tanto un incremento en la eficiencia del reticulado. Sin embargo,  siguen existedo barras negras en el reticulado, puesto que en esas posiciones las cargas soportadas son mínimas y  aunque se están utilizando barras muy pequeñas con poca resistencia el Fu de esa sección sigue siend o muy pequeño. Para mala suerta de nosotros, esas barras no se pueden sacar porque sino se indetermina la estructura.
+
 
 
 
