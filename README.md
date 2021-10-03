@@ -114,8 +114,6 @@ Su peso fue de :
 2° Una vez conseguido el soporte de las cargas distribuidas en el puente diseñado con 3 tipos de secciones, se fue buscando secciones para el mismo diseño pero con menor pesos propios, consiguiendo un puente que cumpliera con las solicitaciones de cargas, y se optimizara el uso de acero.
 
 El Diseño final queda finalmente:
-
-El diseño resultante es el siguiente:
 | VISTA | GRÁFICO |
 | ------------- | ------------- |
 | GENERAL | ![general](https://github.com/RobertoVergaraC/MCOC2021-P1/blob/main/FOTOS/DISE%C3%91O%20PUENTE%20GENERAL2.jpg) |
