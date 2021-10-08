@@ -25,17 +25,6 @@ for i in nodos_apoyo:
     valor[1]=z.append(float(valor[1]))
 
 
-xsum = 0 
-
-for n in range(len(x)):
-    print(f"coordenada x {n} = {x[n]}  -  z {n} = {z[n]}")
-
-    if n >= 7 and n <= 28:
-        xsum += x[n]
-
-
-
-
 
 
 
